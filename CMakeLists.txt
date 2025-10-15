@@ -1,6 +1,6 @@
-add_llvm_library( LLVMStrengthRedPass MODULE
-    StrengthReductionPass.cpp
+add_llvm_library(LLVMIVStrengthReductionPass MODULE
+  IVStrengthReductionPass.cpp
 
-    PLUGIN_TOOL
+  PLUGIN_TOOL
     opt
 )

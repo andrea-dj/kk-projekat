@@ -28,7 +28,7 @@ while( i < 10 ) {
 }
 ```
 
-**The optimized code:**
+**Optimized code:**
 
 ```
 int i = 0;
@@ -59,7 +59,7 @@ add_subdirectory(IVStrengthReductionPass)
  ```
  ./run_pass.sh 1.c 
  ```
- 3. If you're adding your own .c program, place it into the lvm_project/build/tests directory
+ 3. If you're adding your own .c program, place it into the llvm_project/build/tests directory
 
 ## Literature:
  * [Shaojie Xiang & Yi-Hsiang Lai & Yuan Zhou: Strength Reduction Pass in LLVM](https://www.cs.cornell.edu/courses/cs6120/2019fa/blog/strength-reduction-pass-in-llvm/)

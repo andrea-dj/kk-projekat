@@ -92,7 +92,7 @@ for.cond28:                                       ; preds = %for.inc36, %for.end
 
 for.body30:                                       ; preds = %for.cond28
   %mul32 = mul nsw i32 %i27.0, 4
-  %mul33 = mul nsw i32 2, 2
+  %mul33 = mul nsw i32 3, 2
   %add34 = add nsw i32 %mul32, %mul33
   %add35 = add nsw i32 %sum4.0, %add34
   br label %for.inc36

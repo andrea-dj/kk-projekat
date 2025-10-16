@@ -24,13 +24,6 @@ int main() {
         }
     }
 
-    int m = 2;
-    // Loop with step size greater than 1
-    for (int i = 0; i < 10; i += m) {
-        int a = i * 4 + m * 2;   // 
-        sum4 += a;
-    }
-
     printf("Results: %d %d %d %d\n", sum1, sum2, sum3, sum4);
     return 0;
 }

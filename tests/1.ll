@@ -22,6 +22,7 @@ entry:
   %n = alloca i32, align 4
   %t = alloca i32, align 4
   %m26 = alloca i32, align 4
+  %p = alloca i32, align 4
   %i27 = alloca i32, align 4
   %a31 = alloca i32, align 4
   store i32 0, ptr %retval, align 4
@@ -129,6 +130,7 @@ for.inc23:                                        ; preds = %for.end22
 
 for.end25:                                        ; preds = %for.cond9
   store i32 2, ptr %m26, align 4
+  store i32 3, ptr %p, align 4
   store i32 0, ptr %i27, align 4
   br label %for.cond28
 
@@ -140,7 +142,7 @@ for.cond28:                                       ; preds = %for.inc36, %for.end
 for.body30:                                       ; preds = %for.cond28
   %19 = load i32, ptr %i27, align 4
   %mul32 = mul nsw i32 %19, 4
-  %20 = load i32, ptr %m26, align 4
+  %20 = load i32, ptr %p, align 4
   %mul33 = mul nsw i32 %20, 2
   %add34 = add nsw i32 %mul32, %mul33
   store i32 %add34, ptr %a31, align 4

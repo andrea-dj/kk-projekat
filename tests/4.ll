@@ -14,7 +14,7 @@ entry:
   %t = alloca i32, align 4
   store i32 %n, ptr %n.addr, align 4
   store i32 0, ptr %sum, align 4
-  store i32 1, ptr %i, align 4
+  store i32 2, ptr %i, align 4
   br label %for.cond
 
 for.cond:                                         ; preds = %for.inc, %entry
@@ -35,8 +35,8 @@ for.body:                                         ; preds = %for.cond
 
 for.inc:                                          ; preds = %for.body
   %5 = load i32, ptr %i, align 4
-  %inc = add nsw i32 %5, 1
-  store i32 %inc, ptr %i, align 4
+  %add1 = add nsw i32 %5, 2
+  store i32 %add1, ptr %i, align 4
   br label %for.cond, !llvm.loop !6
 
 for.end:                                          ; preds = %for.cond

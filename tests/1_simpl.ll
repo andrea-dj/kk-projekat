@@ -12,16 +12,14 @@ entry:
 
 for.cond:                                         ; preds = %for.inc, %entry
   %i.0 = phi i32 [ 0, %entry ], [ %inc, %for.inc ]
-  %sum1.0 = phi i32 [ 0, %entry ], [ %add2, %for.inc ]
+  %sum1.0 = phi i32 [ 0, %entry ], [ %add, %for.inc ]
   %cmp = icmp slt i32 %i.0, 10
   br i1 %cmp, label %for.body, label %for.end
 
 for.body:                                         ; preds = %for.cond
   %mul = mul nsw i32 %i.0, 4
-  %add = add nsw i32 %mul, 2
-  %div = sdiv i32 %i.0, 4
-  %add1 = add nsw i32 %add, %div
-  %add2 = add nsw i32 %sum1.0, %add1
+  %div = sdiv i32 %i.0, 8
+  %add = add nsw i32 %sum1.0, %mul
   br label %for.inc
 
 for.inc:                                          ; preds = %for.body
@@ -29,61 +27,61 @@ for.inc:                                          ; preds = %for.body
   br label %for.cond, !llvm.loop !6
 
 for.end:                                          ; preds = %for.cond
-  br label %for.cond3
+  br label %for.cond1
 
-for.cond3:                                        ; preds = %for.inc8, %for.end
-  %j.0 = phi i32 [ 20, %for.end ], [ %sub9, %for.inc8 ]
-  %sum2.0 = phi i32 [ 0, %for.end ], [ %add7, %for.inc8 ]
-  %cmp4 = icmp sgt i32 %j.0, 0
-  br i1 %cmp4, label %for.body5, label %for.end10
+for.cond1:                                        ; preds = %for.inc7, %for.end
+  %j.0 = phi i32 [ 5, %for.end ], [ %inc8, %for.inc7 ]
+  %sum2.0 = phi i32 [ 0, %for.end ], [ %add6, %for.inc7 ]
+  %cmp2 = icmp slt i32 %j.0, 10
+  br i1 %cmp2, label %for.body3, label %for.end9
 
-for.body5:                                        ; preds = %for.cond3
-  %sub = sub nsw i32 %j.0, 3
-  %add7 = add nsw i32 %sum2.0, %sub
-  br label %for.inc8
+for.body3:                                        ; preds = %for.cond1
+  %mul5 = mul nsw i32 %j.0, 3
+  %add6 = add nsw i32 %sum2.0, %mul5
+  br label %for.inc7
 
-for.inc8:                                         ; preds = %for.body5
-  %sub9 = sub nsw i32 %j.0, 2
-  br label %for.cond3, !llvm.loop !8
+for.inc7:                                         ; preds = %for.body3
+  %inc8 = add nsw i32 %j.0, 1
+  br label %for.cond1, !llvm.loop !8
 
-for.end10:                                        ; preds = %for.cond3
-  br label %for.cond11
+for.end9:                                         ; preds = %for.cond1
+  br label %for.cond10
 
-for.cond11:                                       ; preds = %for.inc25, %for.end10
-  %m.0 = phi i32 [ 0, %for.end10 ], [ %inc26, %for.inc25 ]
-  %sum3.0 = phi i32 [ 0, %for.end10 ], [ %sum3.1, %for.inc25 ]
-  %cmp12 = icmp slt i32 %m.0, 5
-  br i1 %cmp12, label %for.body13, label %for.end27
+for.cond10:                                       ; preds = %for.inc24, %for.end9
+  %m.0 = phi i32 [ 0, %for.end9 ], [ %add25, %for.inc24 ]
+  %sum3.0 = phi i32 [ 0, %for.end9 ], [ %sum3.1, %for.inc24 ]
+  %cmp11 = icmp slt i32 %m.0, 5
+  br i1 %cmp11, label %for.body12, label %for.end26
 
-for.body13:                                       ; preds = %for.cond11
-  br label %for.cond14
+for.body12:                                       ; preds = %for.cond10
+  br label %for.cond13
 
-for.cond14:                                       ; preds = %for.inc22, %for.body13
-  %sum3.1 = phi i32 [ %sum3.0, %for.body13 ], [ %add21, %for.inc22 ]
-  %n.0 = phi i32 [ 0, %for.body13 ], [ %inc23, %for.inc22 ]
-  %cmp15 = icmp slt i32 %n.0, 5
-  br i1 %cmp15, label %for.body16, label %for.end24
+for.cond13:                                       ; preds = %for.inc21, %for.body12
+  %sum3.1 = phi i32 [ %sum3.0, %for.body12 ], [ %add20, %for.inc21 ]
+  %n.0 = phi i32 [ 0, %for.body12 ], [ %inc22, %for.inc21 ]
+  %cmp14 = icmp slt i32 %n.0, 5
+  br i1 %cmp14, label %for.body15, label %for.end23
 
-for.body16:                                       ; preds = %for.cond14
-  %mul17 = mul nsw i32 %m.0, 2
-  %mul18 = mul nsw i32 %n.0, 3
-  %add19 = add nsw i32 %mul17, %mul18
-  %add20 = add nsw i32 %add19, 1
-  %add21 = add nsw i32 %sum3.1, %add20
-  br label %for.inc22
+for.body15:                                       ; preds = %for.cond13
+  %mul16 = mul nsw i32 %m.0, 2
+  %mul17 = mul nsw i32 %n.0, 3
+  %add18 = add nsw i32 %mul16, %mul17
+  %add19 = add nsw i32 %add18, 1
+  %add20 = add nsw i32 %sum3.1, %add19
+  br label %for.inc21
 
-for.inc22:                                        ; preds = %for.body16
-  %inc23 = add nsw i32 %n.0, 1
-  br label %for.cond14, !llvm.loop !9
+for.inc21:                                        ; preds = %for.body15
+  %inc22 = add nsw i32 %n.0, 1
+  br label %for.cond13, !llvm.loop !9
 
-for.end24:                                        ; preds = %for.cond14
-  br label %for.inc25
+for.end23:                                        ; preds = %for.cond13
+  br label %for.inc24
 
-for.inc25:                                        ; preds = %for.end24
-  %inc26 = add nsw i32 %m.0, 1
-  br label %for.cond11, !llvm.loop !10
+for.inc24:                                        ; preds = %for.end23
+  %add25 = add nsw i32 %m.0, 2
+  br label %for.cond10, !llvm.loop !10
 
-for.end27:                                        ; preds = %for.cond11
+for.end26:                                        ; preds = %for.cond10
   %call = call i32 (ptr, ...) @printf(ptr noundef @.str, i32 noundef %sum1.0, i32 noundef %sum2.0, i32 noundef %sum3.0)
   ret i32 0
 }

@@ -11,20 +11,20 @@ entry:
   br label %for.cond
 
 for.cond:                                         ; preds = %for.inc, %entry
-  %ivsr = phi i32 [ 0, %entry ], [ %0, %for.inc ]
   %sum.0 = phi i32 [ 0, %entry ], [ %add1, %for.inc ]
   %i.0 = phi i32 [ 0, %entry ], [ %inc, %for.inc ]
   %cmp = icmp slt i32 %i.0, %n
   br i1 %cmp, label %for.body, label %for.end
 
 for.body:                                         ; preds = %for.cond
-  %add = add nsw i32 %ivsr, 5
+  %add_for_mul = add i32 %i.0, %i.0
+  %add_for_mul1 = add i32 %add_for_mul, %i.0
+  %add = add nsw i32 %add_for_mul1, 5
   %add1 = add nsw i32 %sum.0, %add
   br label %for.inc
 
 for.inc:                                          ; preds = %for.body
   %inc = add nsw i32 %i.0, 1
-  %0 = add i32 %ivsr, 3
   br label %for.cond, !llvm.loop !6
 
 for.end:                                          ; preds = %for.cond

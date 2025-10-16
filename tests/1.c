@@ -5,18 +5,18 @@ int main() {
     int x = 5;
 
     for (int i = 0; i < 10; i++) {
-        int a = i * 4 + 2; 
-        int b = i / 4;  
-        sum1 += a + b;
+        int a = i * 4; 
+        int b = i / 8;  
+        sum1 += a;
     }
 
 
-    for (int j = 20; j > 0; j -= 2) {
-        int b = j - 3;       
+    for (int j = 5; j < 10; j++) {
+        int b = j * 3;       
         sum2 += b;
     }
-
-    for (int m = 0; m < 5; m++) {
+    
+    for (int m = 0; m < 5; m+=2) {
         for (int n = 0; n < 5; n++) {
             int t = m * 2 + n * 3 + 1; 
             sum3 += t;

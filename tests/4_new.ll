@@ -12,7 +12,7 @@ entry:
 
 for.cond:                                         ; preds = %for.inc, %entry
   %sum.0 = phi i32 [ 0, %entry ], [ %add, %for.inc ]
-  %i.0 = phi i32 [ 1, %entry ], [ %inc, %for.inc ]
+  %i.0 = phi i32 [ 2, %entry ], [ %add1, %for.inc ]
   %cmp = icmp sle i32 %i.0, %n
   br i1 %cmp, label %for.body, label %for.end
 
@@ -22,7 +22,7 @@ for.body:                                         ; preds = %for.cond
   br label %for.inc
 
 for.inc:                                          ; preds = %for.body
-  %inc = add nsw i32 %i.0, 1
+  %add1 = add nsw i32 %i.0, 2
   br label %for.cond, !llvm.loop !6
 
 for.end:                                          ; preds = %for.cond

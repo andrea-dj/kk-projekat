@@ -17,7 +17,7 @@ entry:
   %a = alloca i32, align 4
   %b = alloca i32, align 4
   %j = alloca i32, align 4
-  %b6 = alloca i32, align 4
+  %b4 = alloca i32, align 4
   %m = alloca i32, align 4
   %n = alloca i32, align 4
   %t = alloca i32, align 4
@@ -37,102 +37,99 @@ for.cond:                                         ; preds = %for.inc, %entry
 for.body:                                         ; preds = %for.cond
   %1 = load i32, ptr %i, align 4
   %mul = mul nsw i32 %1, 4
-  %add = add nsw i32 %mul, 2
-  store i32 %add, ptr %a, align 4
+  store i32 %mul, ptr %a, align 4
   %2 = load i32, ptr %i, align 4
-  %div = sdiv i32 %2, 4
+  %div = sdiv i32 %2, 8
   store i32 %div, ptr %b, align 4
   %3 = load i32, ptr %a, align 4
-  %4 = load i32, ptr %b, align 4
-  %add1 = add nsw i32 %3, %4
-  %5 = load i32, ptr %sum1, align 4
-  %add2 = add nsw i32 %5, %add1
-  store i32 %add2, ptr %sum1, align 4
+  %4 = load i32, ptr %sum1, align 4
+  %add = add nsw i32 %4, %3
+  store i32 %add, ptr %sum1, align 4
   br label %for.inc
 
 for.inc:                                          ; preds = %for.body
-  %6 = load i32, ptr %i, align 4
-  %inc = add nsw i32 %6, 1
+  %5 = load i32, ptr %i, align 4
+  %inc = add nsw i32 %5, 1
   store i32 %inc, ptr %i, align 4
   br label %for.cond, !llvm.loop !6
 
 for.end:                                          ; preds = %for.cond
-  store i32 20, ptr %j, align 4
-  br label %for.cond3
+  store i32 5, ptr %j, align 4
+  br label %for.cond1
 
-for.cond3:                                        ; preds = %for.inc8, %for.end
+for.cond1:                                        ; preds = %for.inc7, %for.end
+  %6 = load i32, ptr %j, align 4
+  %cmp2 = icmp slt i32 %6, 10
+  br i1 %cmp2, label %for.body3, label %for.end9
+
+for.body3:                                        ; preds = %for.cond1
   %7 = load i32, ptr %j, align 4
-  %cmp4 = icmp sgt i32 %7, 0
-  br i1 %cmp4, label %for.body5, label %for.end10
+  %mul5 = mul nsw i32 %7, 3
+  store i32 %mul5, ptr %b4, align 4
+  %8 = load i32, ptr %b4, align 4
+  %9 = load i32, ptr %sum2, align 4
+  %add6 = add nsw i32 %9, %8
+  store i32 %add6, ptr %sum2, align 4
+  br label %for.inc7
 
-for.body5:                                        ; preds = %for.cond3
-  %8 = load i32, ptr %j, align 4
-  %sub = sub nsw i32 %8, 3
-  store i32 %sub, ptr %b6, align 4
-  %9 = load i32, ptr %b6, align 4
-  %10 = load i32, ptr %sum2, align 4
-  %add7 = add nsw i32 %10, %9
-  store i32 %add7, ptr %sum2, align 4
-  br label %for.inc8
+for.inc7:                                         ; preds = %for.body3
+  %10 = load i32, ptr %j, align 4
+  %inc8 = add nsw i32 %10, 1
+  store i32 %inc8, ptr %j, align 4
+  br label %for.cond1, !llvm.loop !8
 
-for.inc8:                                         ; preds = %for.body5
-  %11 = load i32, ptr %j, align 4
-  %sub9 = sub nsw i32 %11, 2
-  store i32 %sub9, ptr %j, align 4
-  br label %for.cond3, !llvm.loop !8
-
-for.end10:                                        ; preds = %for.cond3
+for.end9:                                         ; preds = %for.cond1
   store i32 0, ptr %m, align 4
-  br label %for.cond11
+  br label %for.cond10
 
-for.cond11:                                       ; preds = %for.inc25, %for.end10
-  %12 = load i32, ptr %m, align 4
-  %cmp12 = icmp slt i32 %12, 5
-  br i1 %cmp12, label %for.body13, label %for.end27
+for.cond10:                                       ; preds = %for.inc24, %for.end9
+  %11 = load i32, ptr %m, align 4
+  %cmp11 = icmp slt i32 %11, 5
+  br i1 %cmp11, label %for.body12, label %for.end26
 
-for.body13:                                       ; preds = %for.cond11
+for.body12:                                       ; preds = %for.cond10
   store i32 0, ptr %n, align 4
-  br label %for.cond14
+  br label %for.cond13
 
-for.cond14:                                       ; preds = %for.inc22, %for.body13
-  %13 = load i32, ptr %n, align 4
-  %cmp15 = icmp slt i32 %13, 5
-  br i1 %cmp15, label %for.body16, label %for.end24
+for.cond13:                                       ; preds = %for.inc21, %for.body12
+  %12 = load i32, ptr %n, align 4
+  %cmp14 = icmp slt i32 %12, 5
+  br i1 %cmp14, label %for.body15, label %for.end23
 
-for.body16:                                       ; preds = %for.cond14
-  %14 = load i32, ptr %m, align 4
-  %mul17 = mul nsw i32 %14, 2
-  %15 = load i32, ptr %n, align 4
-  %mul18 = mul nsw i32 %15, 3
-  %add19 = add nsw i32 %mul17, %mul18
-  %add20 = add nsw i32 %add19, 1
-  store i32 %add20, ptr %t, align 4
-  %16 = load i32, ptr %t, align 4
-  %17 = load i32, ptr %sum3, align 4
-  %add21 = add nsw i32 %17, %16
-  store i32 %add21, ptr %sum3, align 4
-  br label %for.inc22
+for.body15:                                       ; preds = %for.cond13
+  %13 = load i32, ptr %m, align 4
+  %mul16 = mul nsw i32 %13, 2
+  %14 = load i32, ptr %n, align 4
+  %mul17 = mul nsw i32 %14, 3
+  %add18 = add nsw i32 %mul16, %mul17
+  %add19 = add nsw i32 %add18, 1
+  store i32 %add19, ptr %t, align 4
+  %15 = load i32, ptr %t, align 4
+  %16 = load i32, ptr %sum3, align 4
+  %add20 = add nsw i32 %16, %15
+  store i32 %add20, ptr %sum3, align 4
+  br label %for.inc21
 
-for.inc22:                                        ; preds = %for.body16
-  %18 = load i32, ptr %n, align 4
-  %inc23 = add nsw i32 %18, 1
-  store i32 %inc23, ptr %n, align 4
-  br label %for.cond14, !llvm.loop !9
+for.inc21:                                        ; preds = %for.body15
+  %17 = load i32, ptr %n, align 4
+  %inc22 = add nsw i32 %17, 1
+  store i32 %inc22, ptr %n, align 4
+  br label %for.cond13, !llvm.loop !9
 
-for.end24:                                        ; preds = %for.cond14
-  br label %for.inc25
+for.end23:                                        ; preds = %for.cond13
+  br label %for.inc24
 
-for.inc25:                                        ; preds = %for.end24
-  %19 = load i32, ptr %m, align 4
-  %inc26 = add nsw i32 %19, 1
-  store i32 %inc26, ptr %m, align 4
-  br label %for.cond11, !llvm.loop !10
+for.inc24:                                        ; preds = %for.end23
+  %18 = load i32, ptr %m, align 4
+  %add25 = add nsw i32 %18, 2
+  store i32 %add25, ptr %m, align 4
+  br label %for.cond10, !llvm.loop !10
 
-for.end27:                                        ; preds = %for.cond11
-  %20 = load i32, ptr %sum1, align 4
-  %21 = load i32, ptr %sum2, align 4
-  %22 = load i32, ptr %sum3, align 4
-  %call = call i32 (ptr, ...) @printf(ptr noundef @.str, i32 noundef %20, i32 noundef %21, i32 noundef %22)
+for.end26:                                        ; preds = %for.cond10
+  %19 = load i32, ptr %sum1, align 4
+  %20 = load i32, ptr %sum2, align 4
+  %21 = load i32, ptr %sum3, align 4
+  %call = call i32 (ptr, ...) @printf(ptr noundef @.str, i32 noundef %19, i32 noundef %20, i32 noundef %21)
   ret i32 0
 }
 

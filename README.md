@@ -41,6 +41,26 @@ while( i < 10 ) {
 
 ```
 
+## Instructions:
+
+**To run it, follow these steps:**
+
+ 1. Place the make_llvm.sh script in the llvmproject/.
+ 2. Move IVStrengthReductionPass directory to llvmproject/llvm/lib/Transforms/.
+ 3. Add to the llvmproject/llvm/lib/Transforms/CMakeLists.txt the following line:
+
+```
+add_subdirectory(IVStrengthReductionPass)
+```
+**Running the tests:**
+
+ 1. Place the tests directory into the llvm_project/build directory
+ 2. Run the run_pass.sh script from the llvm_project/build/tests directory as follows: 
+ ```
+ ./run_pass.sh 1.c 
+ ```
+ 3. If you're adding your own .c program, place it into the lvm_project/build/tests directory
+
 ## Literature:
  * [Shaojie Xiang & Yi-Hsiang Lai & Yuan Zhou: Strength Reduction Pass in LLVM](https://www.cs.cornell.edu/courses/cs6120/2019fa/blog/strength-reduction-pass-in-llvm/)
 

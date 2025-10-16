@@ -3,4 +3,8 @@ add_llvm_library(LLVMIVStrengthReductionPass MODULE
 
   PLUGIN_TOOL
     opt
+
+  DEPENDS
+    intrinsics_gen
+
 )
